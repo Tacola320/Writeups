@@ -52,11 +52,11 @@ Then I add a execute rights and start a script.
 
 When I checked results my eyes stopped on files inside /opt/tomcat. I saw interesting file called user.txt. 
 
-![MSF vuln](tomcat_folder.png)
+![MSF vuln](tomcat_folder.PNG)
 
 In that file we have the first flag for tomcat user - HTB{1n53cur3_d353r14l1z4710n_c4n_b3_v3ry_d4n63r0u5}. 
 
-![Flag tomcat](user_flag.png)
+![Flag tomcat](user_flag.PNG)
 
 The second one flag for root user  unfortunaley I didn't catch :/.
 
