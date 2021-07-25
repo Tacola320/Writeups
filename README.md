@@ -1,2 +1,2 @@
 # Writeups
-My writeups from varoius ctfs
+My writeups from various ctfs.
