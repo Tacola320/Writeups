@@ -13,13 +13,13 @@ I will try to check what is that in browser by typing ```http://10.129.173.133:8
 ![Checking site...](redir.PNG)
 
 It redirected us to ```http://manager.htb:8080/openam/UI/login``` which is unavailable.
-In that case It's good to add in /etc/hosts a static domain to IP mapping and try do it again:
+In that case It's good to add in ```/etc/hosts``` a static domain to IP mapping and try do it again:
 
 ![/etc/hosts changing](etc_hosts.PNG)
 
 After successful change, let's try again and see what's behind it:
 
-![openam website](openam_webiste.PNG)
+![openam website](openam_website.PNG)
 
 It's a OpenAM login webiste - we don't have any credentials, so first I checked for exploits for it.
 By typing ```openam exploit``` I found the fresh one vulnerability, which is Pre-auth RCE in ForgeRock OpenAM (CVE-2021-35464). It's a classic example of Java deserialization - more details you can find [there](https://portswigger.net/research/pre-auth-rce-in-forgerock-openam-cve-2021-35464). On [packet storm](https://packetstormsecurity.com/files/cve/CVE-2021-35464) I found also the raw exploit code and the Metasploit module called ```exploit/multi/http/cve_2021_35464_forgerock_openam```:
@@ -50,7 +50,7 @@ Then I add a execute rights and start a script.
 
 ![Linpeas](linpeas_start.PNG)
 
-When I checked results my eyes stopped on files inside /opt/tomcat. I saw interesting file called user.txt. 
+When I checked results my eyes stopped on files inside ```/opt/tomcat```. I saw interesting file called ```user.txt```. 
 
 ![MSF vuln](tomcat_folder.PNG)
 
