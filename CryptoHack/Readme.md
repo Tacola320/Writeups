@@ -8,4 +8,4 @@ Several of the challenges are dynamic and require you to talk to our challenge s
 Python makes such network communication easy with the ```telnetlib``` module. Conveniently, it's part of Python's standard library, so let's use it for now.
 Connect at nc socket.cryptohack.org 11112
 
-Useful scripts in Intrduction folder.
+Useful scripts in Introduction folder.
